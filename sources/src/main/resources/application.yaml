@@ -1,0 +1,21 @@
+spring:
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+  data:
+    rest:
+      basePath: ${BASE_PATH:/data/api}
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5433}/${DB_NAME:blog-database}
+    username: ${DB_USER:test}
+    password: ${DB_PASSWORD:test}
+    driver-class-name: org.postgresql.Driver
+  liquibase:
+    change-log: classpath:/database/blog_changelog.yml
+    enabled: true
+
+logging:
+  level:
+    org:
+      springframework:
+        jdbc:
+          core: "DEBUG"

@@ -1,0 +1,15 @@
+databaseChangeLog:
+  - include:
+      file: 01_users_table.sql
+      relativeToChangelogFile: true
+  - include:
+      file: 02_article_table.sql
+      relativeToChangelogFile: true
+  - include:
+      file: 03_comments_table.sql
+      relativeToChangelogFile: true
+  - changeSet:
+      id: release/0.1
+      author: zhuch
+      tagDatabase:
+        - tag: release/0.1
