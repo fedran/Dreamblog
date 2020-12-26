@@ -10,6 +10,9 @@ import java.util.List;
 import static org.zhuch.dreamblog.persistence.row.ArticleRow.ARTICLE;
 import static org.zhuch.dreamblog.persistence.row.UserRow.USER;
 
+/*
+ * https://docs.spring.io/spring-data/rest/docs/current/reference/html/#reference
+ */
 @RepositoryRestResource(collectionResourceRel = ARTICLE, path = ARTICLE)
 public interface IArticleRepository extends PagingAndSortingRepository<ArticleRow, Long> {
 

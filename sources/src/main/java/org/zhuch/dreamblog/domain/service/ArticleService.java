@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.zhuch.dreamblog.domain.Article;
 import org.zhuch.dreamblog.persistence.repository.IArticleCommentsRepository;
 import org.zhuch.dreamblog.persistence.repository.IArticleRepository;
@@ -13,6 +14,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class ArticleService {
     private final IArticleRepository articleRepository;
     private final IArticleCommentsRepository joinedRepository;
@@ -47,7 +49,6 @@ public class ArticleService {
         page = page == null ? 0 : page;
         size = size == null ? 25 : size;
         return articleRepository.findAll(PageRequest.of(page, size)).stream()
-            .sorted()
             .map(Article::fromRow)
             .collect(Collectors.toList());
     }

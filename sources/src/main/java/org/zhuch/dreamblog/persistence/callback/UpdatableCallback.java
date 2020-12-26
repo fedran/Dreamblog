@@ -19,10 +19,6 @@ public class UpdatableCallback implements BeforeConvertCallback<Updatable> {
     public Updatable onBeforeConvert(@NotNull final Updatable aggregate) {
         var now = LocalDateTime.now();
         log.debug("update aggregate - {} - time -  {}", aggregate, now);
-        var article = aggregate.withUpdated(now);
-        if (aggregate.getId() == null && aggregate.getCreated() == null) {
-            article = article.withCreated(LocalDateTime.now());
-        }
-        return article;
+        return aggregate.withUpdated(now);
     }
 }

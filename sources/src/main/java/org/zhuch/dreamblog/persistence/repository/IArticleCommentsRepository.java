@@ -11,6 +11,9 @@ import java.util.Optional;
 import static org.zhuch.dreamblog.persistence.row.ArticleRow.ARTICLE;
 import static org.zhuch.dreamblog.persistence.row.CommentRow.COMMENT;
 
+/*
+ * https://docs.spring.io/spring-data/data-jdbc/docs/current/reference/html/#preface
+ */
 public interface IArticleCommentsRepository extends Repository<ArticleCommentsRow, Long> {
 
     @Query(

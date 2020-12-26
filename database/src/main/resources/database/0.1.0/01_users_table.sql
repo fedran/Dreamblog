@@ -14,7 +14,7 @@ CREATE TABLE users (
     email varchar NOT NULL,
     password_hash varchar NOT NULL,
     role_id integer REFERENCES roles,
-    created timestamp NOT NULL,
+    created timestamp NOT NULL DEFAULT NOW(),
     updated timestamp NOT NULL
 );
 

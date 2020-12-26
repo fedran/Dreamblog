@@ -1,9 +1,9 @@
 package org.zhuch.dreamblog.persistence.row;
 
-import liquibase.pro.packaged.L;
 import lombok.Value;
 import lombok.With;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.data.relational.core.mapping.Table;
 import org.zhuch.dreamblog.persistence.Updatable;
 
@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 @Value
 @Table(UserRow.USER)
-public class UserRow implements Updatable<Long> {
+public class UserRow implements Updatable {
     public static final String USER = "users";
 
     @Id
@@ -21,7 +21,7 @@ public class UserRow implements Updatable<Long> {
     String email;
     String passwordHash;
     int roleId;
-    @With
+    @ReadOnlyProperty
     LocalDateTime created;
     @With
     LocalDateTime updated;
@@ -38,10 +38,5 @@ public class UserRow implements Updatable<Long> {
     public static UserRow of(String username, String email, String password_hash) {
         var now = LocalDateTime.now();
         return new UserRow(null, username, email, password_hash, 2, now, now);
-    }
-
-    @Override
-    public Long getId() {
-        return userId;
     }
 }
