@@ -12,6 +12,9 @@ import org.zhuch.dreamblog.input.json.ArticleDto;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/*
+ * https://docs.spring.io/spring-framework/docs/current/reference/html/web.html
+ */
 @Slf4j
 @RestController
 @RequestMapping("/api/articles")
