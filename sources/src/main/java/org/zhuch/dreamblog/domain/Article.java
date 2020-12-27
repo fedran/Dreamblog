@@ -1,6 +1,5 @@
 package org.zhuch.dreamblog.domain;
 
-import lombok.Builder;
 import lombok.Value;
 import lombok.With;
 import org.zhuch.dreamblog.input.json.ArticleDto;
