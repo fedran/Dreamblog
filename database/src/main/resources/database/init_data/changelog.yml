@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - include:
+      file: 01_initialize_data.sql
+      relativeToChangelogFile: true
+  - changeSet:
+      id: initialize
+      author: zhuch
+      tagDatabase:
+        - tag: initialize
