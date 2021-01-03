@@ -18,7 +18,7 @@ public class UserDto {
     String username;
     String email;
     String password;
-    int roleId;
+    String role;
     @With
     LocalDateTime created;
     @With
@@ -27,7 +27,7 @@ public class UserDto {
     @NotNull
     public static UserDto fromDomain(@NotNull final User domain) {
         return new UserDto(domain.getUserId(), domain.getUsername(),
-                domain.getEmail(), domain.getPasswordHash(), domain.getRoleId(),
-                domain.getCreated(), domain.getUpdated());
+            domain.getEmail(), null, domain.getRole().name(),
+            domain.getCreated(), domain.getUpdated());
     }
 }
