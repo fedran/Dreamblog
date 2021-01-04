@@ -3,12 +3,14 @@ package org.zhuch.dreamblog.domain.service;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.zhuch.dreamblog.domain.Article;
 import org.zhuch.dreamblog.persistence.repository.IArticleCommentsRepository;
 import org.zhuch.dreamblog.persistence.repository.IArticleRepository;
+import org.zhuch.dreamblog.persistence.row.ArticleRow;
 
 import java.util.List;
 import java.util.Optional;
@@ -47,10 +49,15 @@ public class ArticleService {
     }
 
     @NotNull
-    public List<Article> find(@Nullable String pattern, @Nullable Integer page, @Nullable Integer size) {
+    public List<Article> find(
+        @Nullable final String pattern,
+        @Nullable Integer page,
+        @Nullable Integer size
+    ) {
         page = page == null ? 0 : page;
         size = size == null ? 25 : size;
-        return articleRepository.findAll(PageRequest.of(page, size)).stream()
+        final Page<ArticleRow> arPage = articleRepository.findAll(PageRequest.of(page, size));
+        return arPage.stream()
             .map(Article::fromRow)
             .collect(Collectors.toList());
     }

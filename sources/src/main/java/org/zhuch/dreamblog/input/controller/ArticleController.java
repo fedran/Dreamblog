@@ -40,7 +40,8 @@ public class ArticleController {
         @RequestParam(name = "page", required = false) Integer page,
         @RequestParam(name = "size", required = false) Integer size
     ) {
-        return articleService.find(pattern, page, size).stream()
+        final List<Article> articles = articleService.find(pattern, page, size);
+        return articles.stream()
             .map(ArticleDto::fromDomain)
             .collect(Collectors.toList());
     }

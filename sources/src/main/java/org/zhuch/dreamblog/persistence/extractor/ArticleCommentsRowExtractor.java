@@ -23,11 +23,15 @@ public class ArticleCommentsRowExtractor implements ResultSetExtractor<Optional<
             if (first) {
                 articleId = rs.getLong("article_id");
                 Long userId = rs.getLong("user_id");
+                final String caption = rs.getString("caption");
                 String content = rs.getString("content");
                 LocalDateTime created = rs.getTimestamp("created").toLocalDateTime();
                 LocalDateTime updated = rs.getTimestamp("updated").toLocalDateTime();
                 comments = new HashSet<>();
-                articleComments = new ArticleCommentsRow(articleId, userId, content, created, updated, comments);
+                final int likes = rs.getInt("likes");
+                final int dislikes = rs.getInt("dislikes");
+                final int views = rs.getInt("views");
+                articleComments = new ArticleCommentsRow(articleId, userId, caption, content, created, updated, comments, likes, dislikes, views);
                 first = false;
             }
             String commentId = rs.getString("comment_id");

@@ -30,10 +30,17 @@ public class UserArticlesRowExtractor implements ResultSetExtractor<Optional<Use
             }
             String articleId = rs.getString("article_id");
             if (articleId != null) {
+                final String caption = rs.getString("caption");
                 String content = rs.getString("content");
                 LocalDateTime created = rs.getTimestamp("created").toLocalDateTime();
                 LocalDateTime updated = rs.getTimestamp("updated").toLocalDateTime();
-                ArticleRow articleRow = new ArticleRow(Long.parseLong(articleId), userId, content, created, updated);
+                final int likes = rs.getInt("likes");
+                final int dislikes = rs.getInt("dislikes");
+                final int views = rs.getInt("views");
+                ArticleRow articleRow = new ArticleRow(
+                    Long.parseLong(articleId), userId, caption, content,
+                    created, updated, likes, dislikes, views
+                );
                 articles.add(articleRow);
             }
         }
