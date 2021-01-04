@@ -2,6 +2,7 @@ package org.zhuch.dreamblog.domain.service;
 
 import org.zhuch.dreamblog.persistence.repository.IUserRepository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.zhuch.dreamblog.persistence.row.UserRow;
 import org.springframework.stereotype.Service;
@@ -13,11 +14,12 @@ import java.util.stream.Collectors;
 import java.util.Optional;
 import java.util.List;
 
-@Service
 @Transactional
+@Service
 public class UserService {
     private final IUserRepository userRepository;
 
+    @Autowired
     public UserService(final IUserRepository userRepository) {
         this.userRepository = userRepository;
     }
@@ -45,9 +47,11 @@ public class UserService {
     }
 
     @NotNull
-    public List<User> find(@Nullable final String pattern,
-                           @Nullable Integer page,
-                           @Nullable Integer size) {
+    public List<User> find(
+        @Nullable final String pattern,
+        @Nullable Integer page,
+        @Nullable Integer size
+    ) {
         page = page == null ? 0 : page;
         size = size == null ? 25 : size;
         return userRepository.findAll(PageRequest.of(page, size)).stream()

@@ -1,8 +1,6 @@
 package org.zhuch.dreamblog.domain;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.zhuch.dreamblog.persistence.row.UserRow;
-import org.zhuch.dreamblog.input.json.UserDto;
 import lombok.Value;
 import lombok.With;
 
@@ -20,14 +18,6 @@ public class User {
     LocalDateTime created;
     @With
     LocalDateTime updated;
-
-    public static User fromDto(final UserDto userDto) {
-        return new User(userDto.getUserId(), userDto.getUsername(),
-            userDto.getEmail(),
-            new BCryptPasswordEncoder().encode(userDto.getPassword()),
-            Role.valueOf(userDto.getRole()), userDto.getCreated(),
-            userDto.getUpdated());
-    }
 
     public static User fromRow(final UserRow row) {
         return new User(row.getUserId(), row.getUsername(), row.getEmail(),

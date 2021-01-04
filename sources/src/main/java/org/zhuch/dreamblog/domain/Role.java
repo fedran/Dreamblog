@@ -3,20 +3,27 @@ package org.zhuch.dreamblog.domain;
 import org.jetbrains.annotations.NotNull;
 
 public enum Role {
-    ADMIN, USER;
+    ADMIN(1), USER(2);
+
+    int ordinalNumber;
+
+    Role(final int ordinalNumber) {
+        this.ordinalNumber = ordinalNumber;
+    }
 
     @NotNull
     public static Role fromInt(final int i) {
-        if (i == 1) {
-            return ADMIN;
+        switch (i) {
+            case 1:
+                return ADMIN;
+            case 2:
+                return USER;
+            default:
+                throw new IllegalArgumentException("wrong role ordinal number");
         }
-        return USER;
     }
 
     public static int toInt(@NotNull final Role role) {
-        if (role == ADMIN) {
-            return 1;
-        }
-        return 2;
+        return role.ordinalNumber;
     }
 }
