@@ -27,6 +27,6 @@ public class User {
 
     public UserRow toRow() {
         return new UserRow(userId, username, email, passwordHash,
-            role.ordinal() + 1, created, updated);
+            Role.toInt(role), created, updated);
     }
 }
