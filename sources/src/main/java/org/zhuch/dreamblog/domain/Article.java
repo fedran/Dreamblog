@@ -28,8 +28,9 @@ public class Article {
     public static Article fromDto(final ArticleDto dto) {
         return new Article(
             dto.getArticleId(), dto.getUserId(), dto.getCaption(),
-            dto.getContent(), dto.getCreated(), dto.getUpdated(),
-            null, dto.getLikes(), dto.getDislikes(), dto.getViews());
+            dto.getContent(), null, null,
+            null, dto.getLikes(), dto.getDislikes(), dto.getViews()
+        );
     }
 
     public static Article fromRow(final ArticleRow row) {
@@ -55,5 +56,4 @@ public class Article {
             created, updated, likes, dislikes, views
         );
     }
-
 }

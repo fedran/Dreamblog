@@ -23,28 +23,36 @@ public class ArticleService {
     private final IArticleCommentsRepository joinedRepository;
 
     @Autowired
-    public ArticleService(IArticleRepository articleRepository, IArticleCommentsRepository joinedRepository) {
+    public ArticleService(
+        final IArticleRepository articleRepository,
+        final IArticleCommentsRepository joinedRepository
+    ) {
         this.articleRepository = articleRepository;
         this.joinedRepository = joinedRepository;
     }
 
     @NotNull
-    public Optional<Article> findById(@NotNull Long id) {
+    public Optional<Article> findById(@NotNull final Long id) {
         return joinedRepository
             .findById(id)
             .map(Article::fromJoined);
     }
 
     @NotNull
-    public Article save(@NotNull Article article) {
-        return Article.fromRow(articleRepository.save(article.toRow()));
+    public Article save(@NotNull final Article article) {
+        final ArticleRow articleRow = article.toRow();
+        final ArticleRow saveResult = articleRepository.save(articleRow);
+//TODO: make changes: created: LocalDateTime.now, updated: null;
+        //при сохранении нового article saveResult возвращается с
+        // created: null, updated: LocalDateTime.now;
+        return Article.fromRow(saveResult);
     }
 
-    public void delete(@NotNull Article article) {
+    public void delete(@NotNull final Article article) {
         articleRepository.delete(article.toRow());
     }
 
-    public void deleteById(@NotNull Long id) {
+    public void deleteById(@NotNull final Long id) {
         articleRepository.deleteById(id);
     }
 

@@ -1,21 +1,18 @@
 package org.zhuch.dreamblog.input.controller;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import org.zhuch.dreamblog.domain.Article;
 import org.zhuch.dreamblog.domain.service.ArticleService;
+import org.springframework.web.bind.annotation.*;
 import org.zhuch.dreamblog.input.json.ArticleDto;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
+import org.zhuch.dreamblog.domain.Article;
+import org.springframework.http.MediaType;
+import lombok.extern.slf4j.Slf4j;
 
-import java.util.List;
 import java.util.stream.Collectors;
+import java.util.List;
 
-/*
- * https://docs.spring.io/spring-framework/docs/current/reference/html/web.html
- */
 @Slf4j
 @RestController
 @RequestMapping("/api/articles")
@@ -23,12 +20,12 @@ public class ArticleController {
     private final ArticleService articleService;
 
     @Autowired
-    public ArticleController(ArticleService articleService) {
+    public ArticleController(final ArticleService articleService) {
         this.articleService = articleService;
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ArticleDto> getArticle(@PathVariable("id") Long id) {
+    public ResponseEntity<ArticleDto> getArticle(@PathVariable("id") final Long id) {
         return articleService.findById(id)
             .map(a -> ResponseEntity.ok().body(ArticleDto.fromDomain(a)))
             .orElse(ResponseEntity.notFound().build());
@@ -48,8 +45,10 @@ public class ArticleController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ArticleDto createArticle(@RequestBody ArticleDto article) {
-        return ArticleDto.fromDomain(articleService.save(Article.fromDto(article)));
+    public ArticleDto createArticle(@RequestBody final ArticleDto articleDto) {
+        final Article article = Article.fromDto(articleDto);
+        final Article saveResult = articleService.save(article);
+        return ArticleDto.fromDomain(saveResult);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
