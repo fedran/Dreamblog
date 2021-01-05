@@ -5,10 +5,10 @@ import org.jetbrains.annotations.NotNull;
 public enum Role {
     ADMIN(1), USER(2);
 
-    int ordinalNumber;
+    private int id;
 
-    Role(final int ordinalNumber) {
-        this.ordinalNumber = ordinalNumber;
+    Role(final int id) {
+        this.id = id;
     }
 
     @NotNull
@@ -24,6 +24,6 @@ public enum Role {
     }
 
     public static int toInt(@NotNull final Role role) {
-        return role.ordinalNumber;
+        return role.id;
     }
 }

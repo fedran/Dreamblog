@@ -33,9 +33,9 @@ public class UserService {
 
     @NotNull
     public User save(@NotNull final User user) {
-        final UserRow saveParamsRow = user.toRow();
-        final UserRow saveResultRow = userRepository.save(saveParamsRow);
-        return User.fromRow(saveResultRow);
+        final UserRow userRow = user.toRow();
+        final UserRow saveResultUserRow = userRepository.save(userRow);
+        return User.fromRow(saveResultUserRow);
     }
 
     public void delete(@NotNull final User user) {
