@@ -13,6 +13,7 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.stream.Collectors;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.List;
 
@@ -39,13 +40,9 @@ public class ArticleService {
     }
 
     @NotNull
-    public Article save(@NotNull final Article article) {
-        final ArticleRow articleRow = article.toRow();
-        final ArticleRow saveResult = articleRepository.save(articleRow);
-//TODO: make changes: created: LocalDateTime.now, updated: null;
-        //при сохранении нового article saveResult возвращается с
-        // created: null, updated: LocalDateTime.now;
-        return Article.fromRow(saveResult);
+    public Article save(@NotNull Article article) {
+        article = article.withCreated(LocalDateTime.now());
+        return Article.fromRow(articleRepository.save(article.toRow()));
     }
 
     public void delete(@NotNull final Article article) {
@@ -64,9 +61,22 @@ public class ArticleService {
     ) {
         page = page == null ? 0 : page;
         size = size == null ? 25 : size;
-        final Page<ArticleRow> arPage = articleRepository.findAll(PageRequest.of(page, size));
-        return arPage.stream()
+        final Page<ArticleRow> articles =
+            articleRepository.findAll(PageRequest.of(page, size));
+        return articles.stream()
             .map(Article::fromRow)
             .collect(Collectors.toList());
+    }
+
+    public void incrementLike(@NotNull final Long id) {
+        articleRepository.likeIncrement(id);
+    }
+
+    public void incrementDislike(@NotNull final Long id) {
+        articleRepository.dislikeIncrement(id);
+    }
+
+    public void incrementView(@NotNull final Long id) {
+        articleRepository.viewIncrement(id);
     }
 }

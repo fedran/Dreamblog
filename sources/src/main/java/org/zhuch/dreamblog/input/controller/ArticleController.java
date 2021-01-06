@@ -53,13 +53,40 @@ public class ArticleController {
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public void updateArticle(@RequestBody ArticleDto article) {
+    public void updateArticle(@RequestBody final ArticleDto article) {
         articleService.save(Article.fromDto(article));
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public void deleteArticle(@PathVariable("id") Long id) {
+    public void deleteArticle(@PathVariable("id") final Long id) {
         articleService.deleteById(id);
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @GetMapping(
+        value = "/{id}/like/inc",
+        produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public void incrementLike(@PathVariable("id") final Long id) {
+        articleService.incrementLike(id);
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @GetMapping(
+        value = "/{id}/dislike/inc",
+        produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public void incrementDislike(@PathVariable("id") final Long id) {
+        articleService.incrementDislike(id);
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @GetMapping(
+        value = "/{id}/view/inc",
+        produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public void incrementView(@PathVariable("id") final Long id) {
+        articleService.incrementView(id);
     }
 }
