@@ -7,9 +7,9 @@ CREATE TABLE comments (
     user_id bigint REFERENCES users,
     content text NOT NULL,
     created timestamp NOT NULL DEFAULT NOW(),
-    updated timestamp NOT NULL
-    likes bigint NOT NULL default 0,
-    dislikes bigint NOT NULL default 0
+    updated timestamp NOT NULL,
+    likes bigint NOT NULL DEFAULT 0,
+    dislikes bigint NOT NULL DEFAULT 0
 );
 
 COMMENT ON TABLE comments IS 'Комментарии';
