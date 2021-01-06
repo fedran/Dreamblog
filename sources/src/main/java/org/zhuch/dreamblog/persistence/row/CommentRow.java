@@ -1,11 +1,11 @@
 package org.zhuch.dreamblog.persistence.row;
 
+import org.springframework.data.relational.core.mapping.Table;
+import org.springframework.data.annotation.ReadOnlyProperty;
+import org.zhuch.dreamblog.persistence.Updatable;
+import org.springframework.data.annotation.Id;
 import lombok.Value;
 import lombok.With;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.ReadOnlyProperty;
-import org.springframework.data.relational.core.mapping.Table;
-import org.zhuch.dreamblog.persistence.Updatable;
 
 import java.time.LocalDateTime;
 
@@ -18,13 +18,23 @@ public class CommentRow implements Updatable {
     @With
     Long commentId;
     Long articleId;
+    Long userId;
     String content;
     @ReadOnlyProperty
     LocalDateTime created;
     @With
     LocalDateTime updated;
+    @ReadOnlyProperty
+    long likes;
+    long dislikes;
 
-    public static CommentRow of(Long articleId, String content, LocalDateTime created, LocalDateTime updated) {
-        return new CommentRow(null, articleId, content, created, updated);
+    public static CommentRow of(
+        Long articleId, Long userId, String content, LocalDateTime created,
+        LocalDateTime updated, long likes, long dislikes
+    ) {
+        return new CommentRow(
+            null, articleId, userId, content,
+            created, updated, likes, dislikes
+        );
     }
 }
