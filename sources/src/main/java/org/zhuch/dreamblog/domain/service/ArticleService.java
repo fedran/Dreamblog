@@ -40,11 +40,9 @@ public class ArticleService {
     }
 
     @NotNull
-    public Article save(@NotNull final Article article) {
-        article.withCreated(LocalDateTime.now());
-        final ArticleRow articleRow = article.toRow();
-        final ArticleRow saveResult = articleRepository.save(articleRow);
-        return Article.fromRow(saveResult);
+    public Article save(@NotNull Article article) {
+        article = article.withCreated(LocalDateTime.now());
+        return Article.fromRow(articleRepository.save(article.toRow()));
     }
 
     public void delete(@NotNull final Article article) {
@@ -63,12 +61,12 @@ public class ArticleService {
     ) {
         page = page == null ? 0 : page;
         size = size == null ? 25 : size;
-        final Page<ArticleRow> arPage = articleRepository.findAll(PageRequest.of(page, size));
-        return arPage.stream()
+        final Page<ArticleRow> articles =
+            articleRepository.findAll(PageRequest.of(page, size));
+        return articles.stream()
             .map(Article::fromRow)
             .collect(Collectors.toList());
     }
-
 
     public void incrementLike(@NotNull final Long id) {
         articleRepository.likeIncrement(id);
