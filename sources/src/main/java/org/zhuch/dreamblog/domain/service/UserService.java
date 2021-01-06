@@ -4,18 +4,18 @@ import org.zhuch.dreamblog.persistence.repository.IUserRepository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.zhuch.dreamblog.persistence.row.UserRow;
 import org.springframework.stereotype.Service;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.NotNull;
 import org.zhuch.dreamblog.domain.User;
 
 import java.util.stream.Collectors;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.List;
 
-@Transactional
 @Service
+@Transactional
 public class UserService {
     private final IUserRepository userRepository;
 
@@ -32,10 +32,9 @@ public class UserService {
     }
 
     @NotNull
-    public User save(@NotNull final User user) {
-        final UserRow userRow = user.toRow();
-        final UserRow saveResultUserRow = userRepository.save(userRow);
-        return User.fromRow(saveResultUserRow);
+    public User save(@NotNull User user) {
+        user = user.withCreated(LocalDateTime.now());
+        return User.fromRow(userRepository.save(user.toRow()));
     }
 
     public void delete(@NotNull final User user) {
