@@ -21,9 +21,9 @@ public class Article {
     @With
     LocalDateTime updated;
     Set<Comment> comments;
-    int likes;
-    int dislikes;
-    int views;
+    long likes;
+    long dislikes;
+    long views;
 
     public static Article fromDto(final ArticleDto dto) {
         return new Article(

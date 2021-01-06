@@ -11,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import org.zhuch.dreamblog.domain.User;
 
 import java.util.stream.Collectors;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.List;
 
@@ -33,6 +34,7 @@ public class UserService {
 
     @NotNull
     public User save(@NotNull final User user) {
+        user.withCreated(LocalDateTime.now());
         final UserRow userRow = user.toRow();
         final UserRow saveResultUserRow = userRepository.save(userRow);
         return User.fromRow(saveResultUserRow);

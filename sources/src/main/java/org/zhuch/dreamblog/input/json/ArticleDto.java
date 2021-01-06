@@ -24,9 +24,9 @@ public class ArticleDto {
     @With
     LocalDateTime updated;
     Set<CommentDto> comments;
-    int likes;
-    int dislikes;
-    int views;
+    long likes;
+    long dislikes;
+    long views;
 
     @NotNull
     public static ArticleDto fromDomain(@NotNull Article domain) {

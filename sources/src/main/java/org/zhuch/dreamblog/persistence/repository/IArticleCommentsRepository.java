@@ -11,7 +11,8 @@ import java.util.Optional;
 import static org.zhuch.dreamblog.persistence.row.ArticleRow.ARTICLE;
 import static org.zhuch.dreamblog.persistence.row.CommentRow.COMMENT;
 
-public interface IArticleCommentsRepository extends Repository<ArticleCommentsRow, Long> {
+public interface IArticleCommentsRepository
+    extends Repository<ArticleCommentsRow, Long> {
 
     @Query(
         value = "SELECT a.article_id as article_id, a.user_id as user_id, " +

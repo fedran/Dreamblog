@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Value
 @Table(ArticleRow.ARTICLE)
 public class ArticleRow implements Updatable {
-    public static final String ARTICLE = "article";
+    public static final String ARTICLE = "articles";
 
     @Id
     @With
@@ -24,14 +24,16 @@ public class ArticleRow implements Updatable {
     LocalDateTime created;
     @With
     LocalDateTime updated;
-    int likes;
-    int dislikes;
-    int views;
+    @ReadOnlyProperty
+    long likes;
+    @ReadOnlyProperty
+    long dislikes;
+    @ReadOnlyProperty
+    long views;
 
     public static ArticleRow of(
-        final Long userId, final String caption, final String content,
-        final LocalDateTime created, final LocalDateTime updated,
-        final int likes, final int dislikes, final int views
+        Long userId, String caption, String content, LocalDateTime created,
+        LocalDateTime updated, long likes, long dislikes, long views
     ) {
         return new ArticleRow(
             null, userId, caption, content,
@@ -41,7 +43,7 @@ public class ArticleRow implements Updatable {
 
     public static ArticleRow of(
         final Long userId, final String caption, final String content,
-        final int likes, final int dislikes, final int views
+        final long likes, final long dislikes, final long views
     ) {
         return new ArticleRow(
             null, userId, caption, content,

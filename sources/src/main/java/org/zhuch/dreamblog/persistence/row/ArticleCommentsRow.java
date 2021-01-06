@@ -22,7 +22,7 @@ public class ArticleCommentsRow {
     LocalDateTime updated;
     @MappedCollection(idColumn = "article_id")
     Set<CommentRow> comments;
-    int likes;
-    int dislikes;
-    int views;
+    long likes;
+    long dislikes;
+    long views;
 }
