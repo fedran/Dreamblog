@@ -28,7 +28,7 @@ public class CommentService {
 
     @NotNull
     public List<Comment> findByArticleId(@NotNull final Long articleId) {
-        return commentRepository.findAllByArticleId(articleId)
+        return commentRepository.findByArticleId(articleId)
             .stream()
             .map(Comment::fromRow)
             .collect(Collectors.toList());

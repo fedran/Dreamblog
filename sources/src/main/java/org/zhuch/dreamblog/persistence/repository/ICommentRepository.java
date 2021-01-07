@@ -12,8 +12,7 @@ import static org.zhuch.dreamblog.persistence.row.CommentRow.COMMENT;
 public interface ICommentRepository
     extends PagingAndSortingRepository<CommentRow, Long> {
 
-    @Query("SELECT * FROM " + COMMENT + " WHERE article_id = :articleId ")
-    List<CommentRow> findAllByArticleId(Long articleId);
+    List<CommentRow> findByArticleId(Long articleId);
 
     @Query(
         "UPDATE " + COMMENT +

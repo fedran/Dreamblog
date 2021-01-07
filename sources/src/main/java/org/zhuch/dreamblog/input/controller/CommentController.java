@@ -10,9 +10,6 @@ import org.springframework.http.MediaType;
 import org.zhuch.dreamblog.domain.Comment;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.stream.Collectors;
-import java.util.List;
-
 @Slf4j
 @RestController
 @RequestMapping("/api/comments")
@@ -24,32 +21,11 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    @GetMapping(value = "article/{id}", produces =
-        MediaType.APPLICATION_JSON_VALUE)
-    public List<CommentDto> getComments(@PathVariable("id") final Long id) {
-        return commentService.findByArticleId(id)
-            .stream()
-            .map(CommentDto::fromDomain)
-            .collect(Collectors.toList());
-    }
-
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CommentDto> getComment(@PathVariable("id") final Long id) {
         return commentService.findById(id)
             .map(comment -> ResponseEntity.ok().body(CommentDto.fromDomain(comment)))
             .orElse(ResponseEntity.notFound().build());
-    }
-
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<CommentDto> getComments(
-        @RequestParam(name = "pattern", required = false) final String pattern,
-        @RequestParam(name = "page", required = false) final Integer page,
-        @RequestParam(name = "size", required = false) final Integer size
-    ) {
-        final List<Comment> comments = commentService.find(pattern, page, size);
-        return comments.stream()
-            .map(CommentDto::fromDomain)
-            .collect(Collectors.toList());
     }
 
     @ResponseStatus(HttpStatus.CREATED)

@@ -26,6 +26,7 @@ public class CommentRow implements Updatable {
     LocalDateTime updated;
     @ReadOnlyProperty
     long likes;
+    @ReadOnlyProperty
     long dislikes;
 
     public static CommentRow of(
