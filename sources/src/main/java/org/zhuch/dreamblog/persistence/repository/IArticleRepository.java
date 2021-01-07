@@ -18,8 +18,8 @@ public interface IArticleRepository
     @Query(
         "SELECT * FROM " + ARTICLE +
             " WHERE user_id = " +
-            "( SELECT user_id FROM " + USER +
-            " WHERE username = :username ) "
+                "( SELECT user_id FROM " + USER +
+                " WHERE username = :username ) "
     )
     List<ArticleRow> findByUsername(String username);
 

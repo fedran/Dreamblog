@@ -1,5 +1,6 @@
-     ___   /      __        ___        ___        _   __       / __       //      ___       ___
-   //   ) /     //  ) )   //___) )   //   ) )   // ) )  ) )   //   ) )   //     //   ) )  //   ) )
-  //   / /     //        //         //   / /   // / /  / /   //   / /   //     //   / /  ((___/ /
- ((___/ /     //        ((____     ((___( (   // / /  / /   ((___/ /   //     ((___/ /    //__
-                                                                                        ver 0.1.0
+
+${AnsiColor.BRIGHT_WHITE}     ___   /      __        ___        ___        _   __    ${AnsiColor.BRIGHT_GREEN}   / __       //      ___       ___
+${AnsiColor.BRIGHT_WHITE}   //   ) /     //  ) )   //___) )   //   ) )   // ) )  ) ) ${AnsiColor.BRIGHT_GREEN}  //   ) )   //     //   ) )  //   ) )
+${AnsiColor.BRIGHT_WHITE}  //   / /     //        //         //   / /   // / /  / /  ${AnsiColor.BRIGHT_GREEN} //   / /   //     //   / /  ((___/ /
+${AnsiColor.BRIGHT_WHITE} ((___/ /     //        ((____     ((___( (   // / /  / /   ${AnsiColor.BRIGHT_GREEN}((___/ /   //     ((___/ /    //__
+${AnsiBackground.DEFAULT}                                                                                                ver 0.1.0

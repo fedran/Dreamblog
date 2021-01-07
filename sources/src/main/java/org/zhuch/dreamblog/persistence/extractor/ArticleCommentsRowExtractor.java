@@ -37,9 +37,15 @@ public class ArticleCommentsRowExtractor implements ResultSetExtractor<Optional<
             String commentId = rs.getString("comment_id");
             if (commentId != null) {
                 String content = rs.getString("content_comment");
+                final long userId = rs.getLong("user_id_comment");
                 LocalDateTime created = rs.getTimestamp("created_comment").toLocalDateTime();
                 LocalDateTime updated = rs.getTimestamp("updated_comment").toLocalDateTime();
-                comments.add(new CommentRow(Long.parseLong(commentId), articleId, content, created, updated));
+                final long likes = rs.getLong("likes_comment");
+                final long dislikes = rs.getLong("dislikes_comment");
+                comments.add(new CommentRow(
+                    Long.parseLong(commentId), articleId, userId,
+                    content, created, updated, likes, dislikes
+                ));
             }
         }
         return Optional.ofNullable(articleComments);

@@ -15,4 +15,4 @@ CREATE TABLE articles (
 
 COMMENT ON TABLE articles IS 'Статьи в блоге';
 
---rollback DROP TABLE article;
+--rollback DROP TABLE articles;
