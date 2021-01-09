@@ -16,17 +16,20 @@ import java.util.Set;
 public class ArticleDto {
     @With
     Long articleId;
+    @javax.validation.constraints.NotNull
     Long userId;
+    @javax.validation.constraints.NotNull
     String caption;
+    @javax.validation.constraints.NotNull
     String content;
     @With
     LocalDateTime created;
     @With
     LocalDateTime updated;
     Set<CommentDto> comments;
-    long likes;
-    long dislikes;
-    long views;
+    Long likes;
+    Long dislikes;
+    Long views;
 
     @NotNull
     public static ArticleDto fromDomain(@NotNull Article domain) {

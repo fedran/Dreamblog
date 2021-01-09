@@ -19,7 +19,7 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
       - name: Build with maven
         run: ./mvnw -B clean package
-      - run: mkdir staging && cp target/*.jar staging
+      - run: mkdir staging && cp sources/target/*.jar staging
       - uses: actions/upload-artifact@v2
         with:
           name: Package

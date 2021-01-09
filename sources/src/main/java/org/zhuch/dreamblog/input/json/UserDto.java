@@ -3,9 +3,11 @@ package org.zhuch.dreamblog.input.json;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.jetbrains.annotations.NotNull;
+import org.zhuch.dreamblog.domain.Role;
 import org.zhuch.dreamblog.domain.User;
 import lombok.Value;
 import lombok.With;
+import org.zhuch.dreamblog.validation.ValueOfEnum;
 
 import java.time.LocalDateTime;
 
@@ -15,9 +17,12 @@ import java.time.LocalDateTime;
 public class UserDto {
     @With
     Long userId;
+    @javax.validation.constraints.NotNull
     String username;
+    @javax.validation.constraints.NotNull
     String email;
     String password;
+    @ValueOfEnum(enumClass = Role.class)
     String role;
     @With
     LocalDateTime created;
