@@ -17,15 +17,18 @@ import java.util.Set;
 public class CommentDto {
     @With
     Long commentId;
+    @javax.validation.constraints.NotNull
     Long articleId;
+    @javax.validation.constraints.NotNull
     Long userId;
+    @javax.validation.constraints.NotNull
     String content;
     @With
     LocalDateTime created;
     @With
     LocalDateTime updated;
-    long likes;
-    long dislikes;
+    Long likes;
+    Long dislikes;
 
     @NotNull
     public static CommentDto fromDomain(@NotNull final Comment domain) {
