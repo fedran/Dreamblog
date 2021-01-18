@@ -1,5 +1,4 @@
 import {createRouter, createWebHistory} from 'vue-router'
-import Home from '@/views/Home.vue'
 
 const routes = [
   {
@@ -9,9 +8,10 @@ const routes = [
     component: () => import('@/views/Article.vue')
   },
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: '/:queryString(new|top)?',
+    name: 'ArticleList',
+    props: true,
+    component: () => import('@/views/ArticleList.vue')
   },
   {
     path: '/:pathMatch(.*)*',

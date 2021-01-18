@@ -3,29 +3,36 @@ import { createStore } from 'vuex'
 export default createStore({
   state() {
     return {
-      articles: []
+      articleItems: new Map()
     }
   },
   getters: {
-    ARTICLES: state => {
-      return state.articles;
+    ARTICLE_ITEMS: state => key => {
+      if (state.articleItems.has(key)) {
+        return state.articleItems.get(key)
+      }
+      return []
     },
   },
   mutations: {
-    SET_ARTICLES(state, payload) {
-      state.articles = payload
+    SET_ARTICLE_ITEMS(state, { key, value }) {
+      state.articleItems.set(key, value)
+      setTimeout(() => state.articleItems.delete(key), 180000)
     }
   },
   actions: {
-    getArticles: ({ commit }) => {
-      return fetch("http://localhost:8000/api/articles")
+    FETCH_ARTICLE_ITEMS: ({ commit, state }, key) => {
+      if (state.articleItems.has(key)) {
+        return Promise.resolve(state.articleItems.get(key))
+      }
+      return fetch("http://localhost:8000/api/articles/" + key)
           .then(response => {
-            console.log(response)
-            return response.json();
+            return response.json()
           })
-          .then(json => {
-            console.log(json)
-            commit("SET_ARTICLES", json);
+          .then(value => {
+            console.log({ key, value })
+            commit("SET_ARTICLE_ITEMS", { key, value });
+            return value
           })
           .catch(error => {
             console.log(error);
