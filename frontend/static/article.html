@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="articlestyle.css">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Open+Sans:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+    <title>article</title>
+    <!--    comment system     -->
+    <link rel="icon" type="image/png"
+          href="http://www.favicon.cc/logo3d/430212.png"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+          rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+          crossorigin="anonymous">
+</head>
+
+<body>
+
+<nav class="menu">
+    <div class="nav-left">
+        <ul>
+            <li><a href="index.html"><img class="logo" src="favicon.png"
+                                          alt="">dreamblog</a></li>
+        </ul>
+    </div>
+    <div class="nav-right">
+        <ul>
+            <li><a href="mailto:wolfgangschannel@mailbox.org">main</a></li>
+            <li><a href="https://patreon.com/WolfgangsChannel">user</a></li>
+            <li><a href="https://github.com/notthebee">github</a></li>
+        </ul>
+    </div>
+</nav>
+
+<article>
+    <h1 id="Setting%20up%20an%20OpenVPN%20server%20from%20scratch%20on%20Ubuntu%2020.04">
+        Setting up an OpenVPN server from scratch on Ubuntu 20.04</h1>
+
+    <p class="date">June 8, 2020</p>
+
+    <h2 id="Choosing%20a%20provider">Choosing a provider</h2>
+
+    <p>In order to set up a VPN we need to find where we&#39;re going to host
+        it.</p>
+
+    <p>There are a lot of VPS providers that offer servers for as little as $2
+        per month, but there are a few things that you need to consider when
+        choosing a VPS provider:</p>
+
+    <p>Next, enable the stable security updates:</p>
+
+    <pre><code class="language-bash">sudo dpkg-reconfigure -plow unattended-upgrades
+</code></pre>
+
+    <p>After that&#39;s done, let&#39;s edit the config file</p>
+</article>
+
+
+<!-- LikeBtn.com BEGIN -->
+<span class="likebtn-wrapper" data-lang="ru" data-identifier="item_1"></span>
+<script>(function (d, e, s) {
+    if (d.getElementById("likebtn_wjs")) return;
+    a = d.createElement(e);
+    m = d.getElementsByTagName(e)[0];
+    a.async = 1;
+    a.id = "likebtn_wjs";
+    a.src = s;
+    m.parentNode.insertBefore(a, m)
+})(document, "script", "//w.likebtn.com/js/w/widget.js");</script>
+
+<!-- LikeBtn.com END -->
+
+<div id="comments-container">
+    <section id="comment--new" class="comment">
+        <div class="avatar comment__avatar">
+        <span class="user">
+          <img src="images/default.png" alt="Avatar" class="avatar__img">
+        </span>
+        </div>
+        <form id="comment__form">
+            <textarea id="comment__textarea" placeholder="Join the discussion…"
+                      cols="30" rows="4" maxlength="132"></textarea>
+            <button type="submit" id="comment--send">Comment</button>
+        </form>
+    </section>
+    <ul id="comments">
+        <li class="comment">
+            <div class="avatar">
+                <a href="#">
+                    <img src="https://secure.gravatar.com/avatar/de764cb701641bd5ca3419fda6186edb?d=retro&s=55"
+                         alt="Ger photo avatar" class="avatar__img">
+                </a>
+            </div>
+            <div class="comment__content">
+                <header>
+                    <a href="#">
+                        <span class="user__link">Ger</span>
+                    </a>
+                    <span class="comment__pub-date"> - posted 1 week ago</span>
+                    <a href="#" title="report abuse" class="comment__action"><i
+                            class="fa fa-exclamation-triangle comment__action--report-abuse"
+                            aria-hidden="true"></i></a>
+                </header>
+                <p>
+                    Sed felis lorem, venenatis sed malesuada vitae, tempor vel
+                    turpis. Mauris in dui velit, vitae mollis
+                    risus.
+                </p>
+                <footer class="comment__action--footer">
+                    <a href="#" title="like" class="comment__action">like</a>
+                    <a href="#" title="reply" class="comment__action">reply</a>
+                </footer>
+            </div>
+            <ul class="comment__replies">
+                <li class="comment">
+                    <div class="avatar">
+                        <a href="#">
+                            <img src="https://www.phplivesupport.com/pics/icons/avatars/public/avatar_53.png"
+                                 alt="Eva photo avatar" class="avatar__img">
+                        </a>
+                    </div>
+                    <div class="comment__content">
+                        <header>
+                            <a href="#">
+                                <span class="user__link">Eva</span>
+                            </a>
+                            <span class="comment__pub-date"> - posted 1 week ago</span>
+                            <a href="#" title="report abuse"
+                               class="comment__action"><i
+                                    class="fa fa-exclamation-triangle comment__action--report-abuse"
+                                    aria-hidden="true"></i></a>
+                        </header>
+                        <p>
+                            Sed felis lorem, venenatis sed malesuada vitae,
+                            tempor vel turpis. Mauris in dui velit, vitae mollis
+                            risus.
+                        </p>
+                        <footer class="comment__action--footer">
+                            <a href="#" title="like" class="comment__action">like</a>
+                            <a href="#" title="reply" class="comment__action">reply</a>
+                        </footer>
+                    </div>
+                </li>
+                <li class="comment">
+                    <div class="avatar">
+                        <a href="#">
+                            <img src="http://numbersarelife.com/nal/wp-content/uploads/2012/10/youre-faking-55x55.jpg"
+                                 alt="Joe photo avatar" class="avatar__img">
+                        </a>
+                    </div>
+                    <div class="comment__content">
+                        <header>
+                            <a href="#">
+                                <span class="user__link">Joe</span>
+                            </a>
+                            <span class="comment__pub-date"> - posted 1 week ago</span>
+                            <a href="#" title="report abuse"
+                               class="comment__action"><i
+                                    class="fa fa-exclamation-triangle comment__action--report-abuse"
+                                    aria-hidden="true"></i></a>
+                        </header>
+                        <p>
+                            Sed felis lorem, venenatis sed malesuada vitae,
+                            tempor vel turpis. Mauris in dui velit, vitae mollis
+                            risus.
+                        </p>
+                        <footer class="comment__action--footer">
+                            <a href="#" title="like" class="comment__action">like</a>
+                            <a href="#" title="reply" class="comment__action">reply</a>
+                        </footer>
+                    </div>
+                </li>
+                <li class="comment">
+                    <div class="avatar">
+                        <a href="#">
+                            <img src="https://www.phplivesupport.com/pics/icons/avatars/public/avatar_53.png"
+                                 alt="Eva photo avatar" class="avatar__img">
+                        </a>
+                    </div>
+                    <div class="comment__content">
+                        <header>
+                            <a href="#">
+                                <span class="user__link">Eva</span>
+                            </a>
+                            <span class="comment__pub-date"> - posted 1 week ago</span>
+                            <a href="#" title="report abuse"
+                               class="comment__action"><i
+                                    class="fa fa-exclamation-triangle comment__action--report-abuse"
+                                    aria-hidden="true"></i></a>
+                        </header>
+                        <p>
+                            Sed felis lorem, venenatis sed malesuada vitae,
+                            tempor vel turpis. Mauris in dui velit, vitae mollis
+                            risus.
+                        </p>
+                        <footer class="comment__action--footer">
+                            <a href="#" title="like" class="comment__action">like</a>
+                            <a href="#" title="reply" class="comment__action">reply</a>
+                        </footer>
+                    </div>
+                </li>
+            </ul>
+        </li>
+        <li class="comment">
+            <div class="avatar">
+                <a href="#">
+                    <img src="https://www.phplivesupport.com/pics/icons/avatars/public/avatar_53.png"
+                         alt="Eva photo avatar"
+                         class="avatar__img">
+                </a>
+            </div>
+            <div class="comment__content">
+                <header>
+                    <a href="#">
+                        <span class="user__link">Eva</span>
+                    </a>
+                    <span class="comment__pub-date"> - posted 1 week ago</span>
+                    <a href="#" title="report abuse" class="comment__action"><i
+                            class="fa fa-exclamation-triangle comment__action--report-abuse"
+                            aria-hidden="true"></i></a>
+                </header>
+                <p>
+                    Sed felis lorem, venenatis sed malesuada vitae, tempor vel
+                    turpis. Mauris in dui velit, vitae mollis
+                    risus.
+                </p>
+                <footer class="comment__action--footer">
+                    <a href="#" title="like" class="comment__action">like</a>
+                    <a href="#" title="reply" class="comment__action">reply</a>
+                </footer>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<footer><p> by dreamblog team</p></footer>
+
+</body>
+</html>
+
